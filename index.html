@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+</head>
+<body>
+    <h1>Weather Dashboard</h1>
+
+    <main class="flex-row justify-space-between">
+        <!--Left Column-->
+        <div class="col-12 col-md-4">
+          <div class="card">
+            <h3 class="card-header text-uppercase">Search for a City</h3>
+            <form id="city-form" class="card-body">
+              <label class="form-label" for="cityname">City Name</label>
+              <input name="cityname" id="cityname" type="text" autofocus="true" class="form-input" />
+              <button type="submit" class="btn">Submit</button>
+            </form>
+          </div>
+        </div>
+        
+      <!--Right Column-->
+        <div class="col-12 col-md-8">
+          <h2 class="subtitle"> <span id="repo-search-term"></span></h2>
+          <div id="repos-container" class="list-group"></div>
+        </div>
+      </main>
+
+      <script src="assets/js/script.js"></script>
+</body>
+</html>
