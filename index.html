@@ -4,12 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
-    <h1>Weather Dashboard</h1>
+ <!--Header-->
+  <div class="bg-dark pt-2 pb-2"> 
+    <div class="container">
+        <h1 class="text-center text-white">Weather Dashboard</h1>
+    </div>
+</div>
 
-    <main class="flex-row justify-space-between">
-        <!--Left Column-->
+<!--End of Header-->
+
+
+
+
+
+<!--Form start-->
+   <main class="flex-row justify-space-between">
+      
         <div class="col-12 col-md-4">
           <div class="card">
             <h3 class="card-header text-uppercase">Search for a City</h3>
@@ -19,15 +33,144 @@
               <button type="submit" class="btn">Submit</button>
             </form>
           </div>
-        </div>
+        </div> 
+
+        <!--End of form-->
         
-      <!--Right Column-->
-        <div class="col-12 col-md-8">
-          <h2 class="subtitle"> <span id="repo-search-term"></span></h2>
-          <div id="repos-container" class="list-group"></div>
+        
+
+        <!--Five Day Forecast-->
+<div id= "weatherbox" style= 'display:none'>
+
+  <!--Current Weather bo start-->
+
+  <div class="col-8">
+    <div class="row mr-0">
+        <div class="col-12 border border-dark m-3 rounded">
+            <div class="row">
+                <div class="col-12">
+                    <span id="city-name" class="city-name align-middle"></span>
+                    <img id="current-pic" src="placeholder" alt="">
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                  <p class="currentday"></p>
+              </div>
+          </div>
+            <div class="row">
+                <div class="col-12">
+                    <p class="currenttempdegree"></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <p class="currenthumidity"></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <p class="wind"></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 d-flex">
+                    <p class="uvi-index"></p>
+                </div>
+            </div>
         </div>
-      </main>
+    </div>
+
+    <!--end of current weatehr-->
+
+    <!--start of five day forecast-->
+  <h2 class="fiveday">5-Day Forecast:</h2>
+  <div class="row">
+    
+  <div class="col bg-primary text-white ml-3 mb-3 rounded weather1">
+        <div class="location">
+          
+          <p>Icon</p>
+          </div>
+          <div class="date1">
+          <div class="temp">
+            <h2 class="temp-degree1">82 F°</h2>
+            <div class="humidity1">
+              uvi
+            </div>
+        </div>
+        </div>
+      </div>
+       
+      
+
+      <div class="col bg-primary text-white ml-3 mb-3 rounded weather2">
+        <div class="location">
+          <p>Icon</p>
+          </div>
+          <div class="date2">
+          <div class="temp">
+            <h2 class="temp-degree2">82</h2>
+            <div class="humidity2">
+              uvi
+            </div>
+        </div>
+      </div>
+    </div>
+
+        <div class="col bg-primary text-white ml-3 mb-3 rounded weather3">
+          <div class="location">
+            <p>Icon</p>
+            </div>
+            <div class="date3">
+            <div class="temp">
+              <h2 class="temp-degree3">82</h2>
+              <div class="humidity3">
+                uvi
+              </div>
+          </div>
+        </div>
+      </div>
+
+          <div class="col bg-primary text-white ml-3 mb-3 rounded weather4">
+            <div class="location">
+              <p>Icon</p>
+              </div>
+              <div class="date4">
+              <div class="temp">
+                <h2 class="temp-degree4">82</h2>
+                <div class="humidity4">
+                  uvi
+                </div>
+            </div>
+          </div>
+        </div>
+
+            <div class="col bg-primary text-white ml-3 mb-3 rounded weather5">
+              <div class="location">
+                <p>Icon</p>
+                </div>
+                <div class="date5">
+                <div class="temp">
+                  <h2 class="temp-degree5">82</h2>
+                  <div class="humidity5">
+                    uvi
+                  </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+          <!--End of Five Day-->
+
+
+         
+
+
+    
 
       <script src="assets/js/script.js"></script>
-</body>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+</body> 
 </html>

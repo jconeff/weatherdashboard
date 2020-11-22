@@ -1,0 +1,14 @@
+#weatherbox{
+    align-items: center;
+    text-align: center;
+}
+
+.currentday{
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.currenttempdegree{
+    font-weight: bold;
+    font-size: 18px;
+}

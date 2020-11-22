@@ -1,72 +1,89 @@
-var repoContainer = document.querySelector("#repos-container");
-var repoSearchTerm = document.querySelector("#repo-search-term");
-var cityForm = document.querySelector("#city-form");
-var cityInput = document.querySelector("#cityname");
+var cityform = document.querySelector('#city-form');
 
-var formSubmitHandler = function(event) {
+
+cityform.addEventListener('submit', (event)=> {
     event.preventDefault();
-    var cityname = cityInput.value.trim();
+    let uviIndex = document.querySelector('.uvi-index');
+    let tempDegree = document.querySelector('.temp-degree0');
+    let hum = document.querySelector('.humidity0');
+    let currentTemp = document.querySelector('.currenttempdegree');
+    let locationTimezone = document.querySelector('.location-timezone');
+    let city = document.querySelector('#cityname').value;
+    let currentHum = document.querySelector('.currenthumidity');
+    let currentWind = document.querySelector('.wind');
+    let currentday = document.querySelector('.currentday');
+    
 
-    if (cityname) {
-        getCityWeather(cityname);
-        cityInput.value = "";
-    } else {
-        alert("Please enter a city");
-    }
+    
+
+
+    
+    
+//hide 5 day forecast until onclick of submit
+
+    document.querySelector("#weatherbox").style.display = "block";
+
+   
+//API URL  current weather
+           const currentApi = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=c962694451f88c2f69a40aac9d384464&units=imperial';
+           fetch(currentApi)
+           .then(response =>{
+              return response.json();
+           })
+
+           .then(data =>{
+//API for lon and lat / five day weather
+               const apiOneCall = 'https://api.openweathermap.org/data/2.5/onecall?lat=' +data.coord.lat + '&lon=' + data.coord.lon +'&appid=c962694451f88c2f69a40aac9d384464&units=imperial';
+           fetch(apiOneCall)
+           .then(response =>{
+              return response.json();
+           })
+
+           .then(oneCallData =>{
+
+            //loop for tempdegree
+            for (var index = 1; index < 6; index++)
+{
+  let tempDegreeLoop = document.querySelector('.temp-degree' + index);
+  let humLoop = document.querySelector('.humidity'+ index);
+  
+  
+ 
+  tempDegreeLoop.textContent = Math.round(oneCallData.daily[index].temp.day) + "F°"
+  humLoop.textContent = 'humidity:' + oneCallData.daily[index].humidity + '%'
+ 
+  
+  
 }
+           
+//end of loop
+               
+               const{temp, humidity, uvi, wind_speed} = oneCallData.current;
+              
+               
+               //Set DOM Elements from API
+               //current DOM Elements from API 
+               currentTemp.textContent = 'Temperature:' + Math.round(temp) + "F°";
+               currentHum.textContent = 'Humidity:' +humidity + '%';
+               currentWind.textContent = 'Wind speed:' + wind_speed + 'MPH'; 
 
-var getCityWeather = function(city) {
-    var apiUrl = 'api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=c962694451f88c2f69a40aac9d384464';
+               //current day
+               currentday.textContent = moment().subtract(10, 'days').calendar(); 
+               console.log(oneCallData);
 
-    fetch(apiUrl).then(function(response) {
-        if (response.ok) {
-            response.json().then(function(data) {
-                displayRepos(data, city);
-            });
-        } else {
-            alert("Error: " + response.statusText)
-        }
-    })
-    .catch(function(error) {
-        alert("Unable to connect to Open Weather");
-    })
-};
+               //Five day DOM Elements from API
+               hum.textContent = "humidity:" + humidity; 
+               uviIndex.textContent = "UV Index:" + uvi;
+               
+
+              
 
 
-var displayRepos = function(repos, searchTerm) {
-    if (repos.length === 0) {
-        repoContainerEl.textContent = "No weather found.";
-        return;
-    }
+           });
 
-    repoContainer.textContent = "";
-    repoSearchTerm.textContent = searchTerm;
+           });
+        });
 
-    for (var i = 0; i < repos.length; i++) {
-        var repoName = repos[i].owner.login + "/" + repos[i].name;
+    
 
-        // create and append container for each repo
-        var repoEl = document.createElement("a")
-        repoEl.classList = "list-item flex-row justify-space-between align-center";
-        repoEl.setAttribute("href", "./single-repo.html?repo=" + repoName);
-
-        var titleEl = document.createElement("span");
-        titleEl.textContent = repoName;
-
-        var statusEl = document.createElement("span");
-        statusEl.classList = "flex-row align-center";
-
-        if (repos[i].open_issues_count > 0) {
-            statusEl.innerHTML = 
-            "<i class='fas fa-times status-icon icon-danger'></i>" + repos[i].open_issues_count + " issue(s)";
-        } else {
-            statusEl.innerHTML = "<i class='fas fa-check-square status-icon icon-success'></i>";
-        }
-
-        repoEl.appendChild(titleEl);
-        repoEl.appendChild(statusEl);
-        repoContainerEl.appendChild(repoEl);
-    }
-}
-
-cityForm.addEventListener("submit", formSubmitHandler);
+        //event listner keyup use cityname
