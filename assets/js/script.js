@@ -4,7 +4,6 @@ var cityform = document.querySelector('#city-form');
 cityform.addEventListener('submit', (event)=> {
     event.preventDefault();
     let uviIndex = document.querySelector('.uvi-index');
-    let tempDegree = document.querySelector('.temp-degree0');
     let hum = document.querySelector('.humidity0');
     let currentTemp = document.querySelector('.currenttempdegree');
     let locationTimezone = document.querySelector('.location-timezone');
@@ -12,6 +11,15 @@ cityform.addEventListener('submit', (event)=> {
     let currentHum = document.querySelector('.currenthumidity');
     let currentWind = document.querySelector('.wind');
     let currentday = document.querySelector('.currentday');
+    let currentIcon = document.querySelector('.currentpic')
+    let date1 = document.querySelector('.date1');
+    let date2 = document.querySelector('.date2');
+    let date3 = document.querySelector('.date3');
+    let date4 = document.querySelector('.date4');
+    let date5 = document.querySelector('.date5');
+    
+
+    
     
 
     
@@ -50,7 +58,7 @@ cityform.addEventListener('submit', (event)=> {
   
  
   tempDegreeLoop.textContent = Math.round(oneCallData.daily[index].temp.day) + "F°"
-  humLoop.textContent = 'humidity:' + oneCallData.daily[index].humidity + '%'
+  humLoop.textContent = 'Humidity:' + oneCallData.daily[index].humidity + '%'
  
   
   
@@ -59,26 +67,38 @@ cityform.addEventListener('submit', (event)=> {
 //end of loop
                
                const{temp, humidity, uvi, wind_speed} = oneCallData.current;
+               
               
+             const {icon} =  "http://openweathermap.org/img/wn/" + oneCallData.current.weather[0] + ".png"
+          
+            
+            console.log(oneCallData);
                
                //Set DOM Elements from API
                //current DOM Elements from API 
                currentTemp.textContent = 'Temperature:' + Math.round(temp) + "F°";
-               currentHum.textContent = 'Humidity:' +humidity + '%';
+               currentHum.textContent = 'Humidity:' + humidity + '%';
                currentWind.textContent = 'Wind speed:' + wind_speed + 'MPH'; 
+               currentIcon.src = icon;
+              
+               
+              
+             
 
-               //current day
-               currentday.textContent = moment().subtract(10, 'days').calendar(); 
-               console.log(oneCallData);
-
+               //current day + Next 5 days
+            
+               currentday.textContent = moment().format('LL'); 
+               date1.textContent = moment().add(1,'days').format('LL'); 
+               date2.textContent = moment().add(2,'days').format('LL'); 
+               date3.textContent = moment().add(3,'days').format('LL'); 
+               date4.textContent = moment().add(4,'days').format('LL'); 
+               date5.textContent = moment().add(5,'days').format('LL'); 
+               
+        
                //Five day DOM Elements from API
-               hum.textContent = "humidity:" + humidity; 
+               hum.textContent = "Humidity:" + humidity; 
                uviIndex.textContent = "UV Index:" + uvi;
                
-
-              
-
-
            });
 
            });
