@@ -4,7 +4,6 @@ var cityform = document.querySelector('#city-form');
 cityform.addEventListener('submit', (event)=> {
     event.preventDefault();
     let uviIndex = document.querySelector('.uvi-index');
-    let hum = document.querySelector('.humidity0');
     let currentTemp = document.querySelector('.currenttempdegree');
     let locationTimezone = document.querySelector('.location-timezone');
     let city = document.querySelector('#cityname').value;
@@ -12,6 +11,7 @@ cityform.addEventListener('submit', (event)=> {
     let currentWind = document.querySelector('.wind');
     let currentday = document.querySelector('.currentday');
     let currentIcon = document.querySelector('.currentpic')
+    //let icon1 = document.querySelector('.icon1');
     let date1 = document.querySelector('.date1');
     let date2 = document.querySelector('.date2');
     let date3 = document.querySelector('.date3');
@@ -49,16 +49,23 @@ cityform.addEventListener('submit', (event)=> {
 
            .then(oneCallData =>{
 
-            //loop for tempdegree
+            //Start of Loop
             for (var index = 1; index < 6; index++)
 {
   let tempDegreeLoop = document.querySelector('.temp-degree' + index);
   let humLoop = document.querySelector('.humidity'+ index);
+  let iconLoop = document.querySelector('.icon'+ index);
+ 
   
   
  
   tempDegreeLoop.textContent = Math.round(oneCallData.daily[index].temp.day) + "F°"
   humLoop.textContent = 'Humidity:' + oneCallData.daily[index].humidity + '%'
+
+   let weatherPic1 = oneCallData.daily[index].weather[0].icon;
+    iconLoop.setAttribute("src","https://openweathermap.org/img/wn/" + weatherPic1 + "@2x.png");
+
+  
  
   
   
@@ -67,11 +74,19 @@ cityform.addEventListener('submit', (event)=> {
 //end of loop
                
                const{temp, humidity, uvi, wind_speed} = oneCallData.current;
-               
-              
-             const {icon} =  "http://openweathermap.org/img/wn/" + oneCallData.current.weather[0] + ".png"
-          
             
+             let weatherPic = oneCallData.current.weather[0].icon;
+             currentIcon.setAttribute("src","https://openweathermap.org/img/wn/" + weatherPic + "@2x.png");
+
+             //let weatherPic1 = oneCallData.daily[0].weather[0].icon;
+            // icon1.setAttribute("src","https://openweathermap.org/img/wn/" + weatherPic1 + "@2x.png");
+             
+
+             
+
+
+
+    
             console.log(oneCallData);
                
                //Set DOM Elements from API
@@ -79,7 +94,7 @@ cityform.addEventListener('submit', (event)=> {
                currentTemp.textContent = 'Temperature:' + Math.round(temp) + "F°";
                currentHum.textContent = 'Humidity:' + humidity + '%';
                currentWind.textContent = 'Wind speed:' + wind_speed + 'MPH'; 
-               currentIcon.src = icon;
+               //currentIcon.src = icon;
               
                
               
