@@ -35,7 +35,7 @@ UCF Bootcamp week 6 challenge
 * moment.js
 
 ## Website
-https://jconeff.github.io/Work-Day-Scheduler/
+https://jconeff.github.io/weatherdashboard/
 
 ## Contribution
 Made by Jessica Coneff
